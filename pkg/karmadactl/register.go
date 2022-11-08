@@ -53,7 +53,7 @@ var (
 		# Register cluster into karmada control plane with PULL mode.
 		# If '--cluster-name' isn't specified, the cluster of current-context will be used by default.
 		%[1]s register [karmada-apiserver-endpoint] --cluster-name=<CLUSTER_NAME> --token=<TOKEN>  --discovery-token-ca-cert-hash=<CA-CERT-HASH>
-		
+
 		# UnsafeSkipCAVerification allows token-based discovery without CA verification via CACertHashes. This can weaken
 		# the security of register command since other clusters can impersonate the control-plane.
 		%[1]s register [karmada-apiserver-endpoint] --token=<TOKEN>  --discovery-token-unsafe-skip-ca-verification=true
@@ -176,7 +176,7 @@ func NewCmdRegister(parentCommand string) *cobra.Command {
 	flags.StringVar(&opts.KarmadaAgentImage, "karmada-agent-image", fmt.Sprintf("swr.ap-southeast-1.myhuaweicloud.com/karmada/karmada-agent:%s", releaseVer.PatchRelease()), "Karmada agent image.")
 	flags.Int32Var(&opts.KarmadaAgentReplicas, "karmada-agent-replicas", 1, "Karmada agent replicas.")
 	flags.Int32Var(&opts.CertExpirationSeconds, "cert-expiration-seconds", DefaultCertExpirationSeconds, "The expiration time of certificate.")
-	flags.BoolVar(&opts.DryRun, "dry-run", false, "Don't apply any changes; just output what would be done.")
+	flags.BoolVar(&opts.DryRun, "dry-run", false, "Run the command in dry-run mode, without making any server requests.")
 
 	return cmd
 }
